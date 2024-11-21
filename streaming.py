@@ -1,7 +1,6 @@
 import os
 import subprocess
 
-# Список видеофайлов для трансляции
 video_files = [
     "video1.mp4",
     "video2.mp4",
@@ -12,10 +11,9 @@ video_files = [
 rtmp_url = "rtmp://localhost/live/stream"
 
 def stream_video(video_file):
-    # Команда для запуска FFmpeg
     command = [
         'ffmpeg',
-        '-re',  # Чтение входного файла в реальном времени
+        '-re', 
         '-i', video_file,
         '-c:v', 'libx264',
         '-preset', 'veryfast',
@@ -27,18 +25,14 @@ def stream_video(video_file):
         rtmp_url
     ]
     
-    # Запуск процесса FFmpeg
     process = subprocess.Popen(command)
-    
-    # Ожидание завершения процесса
     process.wait()
 
 def main():
-    # Цикл по видеофайлам
     for video in video_files:
-        print(f"Начинаем трансляцию: {video}")
+        print(f"Starting the broadcast: {video}")
         stream_video(video)
-        print(f"Трансляция завершена: {video}")
+        print(f"Broadcast completed: {video}")
 
 if __name__ == "__main__":
     main()
